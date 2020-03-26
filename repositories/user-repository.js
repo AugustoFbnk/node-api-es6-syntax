@@ -12,7 +12,7 @@ async function getById(id) {
 
 async function authenticate(data) {
     const res = {
-        _id: '3131sdfsdsdf',
+        _id: '123456',
         email: 'teste@ferbonink.com',
         name: 'Augusto',
         roles: ''
