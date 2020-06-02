@@ -4,6 +4,7 @@ import controller from '../controllers/aws-s3-controller.js'
 let s3Router = express.Router();
 
 s3Router.get("/:name/:encoding", controller.getObj);
+s3Router.get("/:name/", controller.getSignedUrl);
 s3Router.post("/", controller.uploadObj);
 
 

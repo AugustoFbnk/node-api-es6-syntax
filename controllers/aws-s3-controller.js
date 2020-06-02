@@ -3,7 +3,20 @@ import S3 from '../services/aws-s3-service.js'
 async function getObj(req, res, next) {
     try {
         let s3 = new S3();
-        await s3.getObject(req.params, (data) => {s
+        await s3.getObject(req.params, (data) => {
+            if (data.message) res.status(500).send(`Falha ao processar a requisiçao: ${data.message}`);
+            else res.status(200).send(data);
+        });
+
+    } catch (error) {
+        res.status(500).send(`Falha ao processar a requisição: ${error.message}`);
+    }
+}
+
+async function getSignedUrl(req, res, next) {
+    try {
+        let s3 = new S3();
+        await s3.getSignedtUrl(req.params, (data) => {
             if (data.message) res.status(500).send(`Falha ao processar a requisiçao: ${data.message}`);
             else res.status(200).send(data);
         });
@@ -25,4 +38,4 @@ async function uploadObj(req, res, next) {
     }
 }
 
-export default {getObj, uploadObj};
+export default { getObj, uploadObj, getSignedUrl };

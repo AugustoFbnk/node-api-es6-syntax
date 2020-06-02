@@ -9,6 +9,22 @@ class S3 {
             Bucket: acessoConfiguracao.aws.s3.buckets.bucketHomeFiles.name
         });
     }
+
+    async getSignedtUrl(params, callback) {
+
+        var bucketParams = {
+            Bucket: acessoConfiguracao.aws.s3.buckets.bucketHomeFiles.name,
+            Key: params.name
+        }
+        var url = this.s3.getSignedUrl('getObject', bucketParams, function (err, url) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(url.substring(1, url.indexOf("?")));
+            }
+        });
+    }
     async uploadtObject(data, callback) {
 
         data.body.buffer = getBuffer(data);
