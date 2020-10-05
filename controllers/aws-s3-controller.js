@@ -16,7 +16,7 @@ async function getObj(req, res, next) {
 async function getSignedUrl(req, res, next) {
     try {
         let s3 = new S3();
-        await s3.getSignedtUrl(req.params, (data) => {
+        await s3.getSignedtUrl(req, (data) => {
             if (data.message) res.status(500).send(`Falha ao processar a requisiçao: ${data.message}`);
             else res.status(200).send(data);
         });
@@ -30,8 +30,8 @@ async function uploadObj(req, res, next) {
     try {
         let s3 = new S3();
         await s3.uploadtObject(req, (data) => {
-            if (data.message) res.status(500).send(`Falha ao processar a requisição: ${data.message}`);
-            else res.status(200).send(data);
+            if (data.success) res.status(200).send(data);
+            else res.status(500).send(`Falha ao processar a requisição: ${data.message}`);
         });
     } catch (error) {
         res.status(500).send(`Falha ao processar a requisiçao: ${error.message}`);

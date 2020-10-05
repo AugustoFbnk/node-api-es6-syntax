@@ -9,7 +9,6 @@ async function getById(id) {
     }
 }
 
-
 async function authenticate(data) {
     const res = {
         _id: '123456',

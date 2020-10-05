@@ -10,6 +10,7 @@ const acessoConfiguracao = {
             }
         }
     },
-    accessKey: ''
+    accessKey: '',
+    connectionString: ''
 }
 export default acessoConfiguracao;
